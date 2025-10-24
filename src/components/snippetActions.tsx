@@ -1,7 +1,7 @@
 import type { Snippet } from "../types"
 import { explainSnippet, refactorSnippet, convertSnippet } from "../api/openai"
+import { getSnippets, saveSnippets } from "../utils/storage"
 
-/*provides AI-powered actions for a single snippet, they don’t add/remove snippets from the list. */
 export function SnippetActions({ snippet }: { snippet: Snippet }) {
   /* 
   explainSnippet returns a promise.
@@ -19,11 +19,19 @@ export function SnippetActions({ snippet }: { snippet: Snippet }) {
     alert(await convertSnippet(snippet.code, "Python"))
   }
 
+  function handleDelete() {
+    const snippets = getSnippets()
+    const updated = snippets.filter((s) => s.id !== snippet.id)
+    saveSnippets(updated)
+    window.location.reload() // so UI updates if no parent state
+  }
+
   return (
     <div style={{ margin: "8px 0" }}>
       <button onClick={handleExplain}>Explain</button>
       <button onClick={handleRefactor}>Refactor</button>
       <button onClick={handleConvert}>Convert to Python</button>
+      <button onClick={handleDelete}>Delete snippet</button>
     </div>
   )
 }

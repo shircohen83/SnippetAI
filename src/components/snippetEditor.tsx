@@ -27,6 +27,7 @@ export function SnippetEditor() {
     setCode("")
     setLanguage("")
     setTags("")
+    window.location.reload() // so UI updates if no parent state
   }
 
   return (
