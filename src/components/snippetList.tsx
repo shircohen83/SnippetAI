@@ -1,13 +1,9 @@
-import type { Snippet } from "../types"
+import { getSnippets } from "../utils/storage"
 
 /*presentational component that receives a list of snippets and renders them on the page. */
-export function SnippetList({
-  snippets,
-  onDelete,
-}: {
-  snippets: Snippet[]
-  onDelete: (id: string) => void
-}) {
+export function SnippetList() {
+   const snippets= getSnippets();
+
   return (
     <div>
       {snippets.map((s) => (
@@ -17,7 +13,6 @@ export function SnippetList({
             {s.language} | Tags: {s.tags.join(", ")}
           </small>
           <br />
-          <button onClick={() => onDelete(s.id)}>Delete</button>
         </div>
       ))}
     </div>
