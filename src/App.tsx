@@ -20,10 +20,11 @@ export default function App() {
             borderRadius: "6px",
           }}
         >
-          <pre>{s.code}</pre>
-          <small>
+          {/*pre display the text exactly as you typed it in your code. */}
+          <pre>{s.code}</pre> 
+          <span>
             {s.language} | Tags: {s.tags.join(", ")}
-          </small>
+          </span>
           <SnippetActions snippet={s} />
         </div>
       ))}
