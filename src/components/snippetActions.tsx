@@ -6,10 +6,12 @@ type SnippetActionsProps = {
   snippet: Snippet
   onDelete: (snippet: Snippet) => void
 }
+
 /* 
   explainSnippet returns a promise.
   await pauses the function until the promise resolves.
-  The resolved string is passed to the output */
+  The resolved string is passed to the output
+*/
 export function SnippetActions({ snippet, onDelete }: SnippetActionsProps) {
   const [output, setOutput] = useState<string>("")
 
@@ -43,9 +45,17 @@ export function SnippetActions({ snippet, onDelete }: SnippetActionsProps) {
       <button onClick={handleDelete}>Delete snippet</button>
 
       {output && (
-        <pre className="ai-response-container">
-          {output}
-        </pre>
+        <>
+          <style>{`
+            .ai-response-container {
+              background-color: rgba(144, 238, 144, 0.25);
+              padding: 18px;
+              border-radius: 4px;
+              width: 800px;
+            }
+          `}</style>
+          <pre className="ai-response-container">{output}</pre>
+        </>
       )}
     </div>
   )
