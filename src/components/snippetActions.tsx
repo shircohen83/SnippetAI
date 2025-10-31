@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import type { Snippet } from "../types"
 import { explainSnippet, refactorSnippet, convertSnippet } from "../api/openai"
 
@@ -7,12 +7,13 @@ type SnippetActionsProps = {
   onDelete: (snippet: Snippet) => void
 }
 
+
 /* 
   explainSnippet returns a promise.
   await pauses the function until the promise resolves.
   The resolved string is passed to the output
-*/
-export function SnippetActions({ snippet, onDelete }: SnippetActionsProps) {
+ */
+export const SnippetActions: React.FC<SnippetActionsProps> = ({ snippet, onDelete }) => {
   const [output, setOutput] = useState<string>("")
 
   const handleExplain = async () => {
@@ -33,7 +34,6 @@ export function SnippetActions({ snippet, onDelete }: SnippetActionsProps) {
   const handleDelete = () => {
     const confirmed = window.confirm("Are you sure you want to delete this snippet?")
     if (!confirmed) return
-
     onDelete(snippet)
   }
 
