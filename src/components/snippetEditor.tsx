@@ -1,16 +1,18 @@
 import { useState } from "react"
 import type { Snippet } from "../types"
-import { getSnippets, saveSnippets } from "../utils/storage"
+
+interface SnippetEditorProps {
+  onSave: (snippet: Snippet) => void
+}
 
 /**
  * SnippetEditor Component
  * Allows the user to write a code snippet, select its language, and add tags — then save it.
  */
-const SnippetEditor: React.FC = () => {
+const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
   const [code, setCode] = useState("")
   const [language, setLanguage] = useState("")
   const [tags, setTags] = useState("")
-  const [snippets, setSnippets] = useState<Snippet[]>(getSnippets())
 
   const handleSave = () => {
     if (!code.trim()) return
@@ -23,14 +25,11 @@ const SnippetEditor: React.FC = () => {
       createdAt: new Date().toISOString(),
     }
 
-    const updated = [snippet, ...snippets]
-    setSnippets(updated)
-    saveSnippets(updated)
+    onSave(snippet) // notify parent
 
     setCode("")
     setLanguage("")
     setTags("")
-    window.location.reload() // refreshes UI if no parent state
   }
 
   return (
