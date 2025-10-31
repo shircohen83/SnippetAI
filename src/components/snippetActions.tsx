@@ -1,29 +1,38 @@
+import { useState } from "react"
 import type { Snippet } from "../types"
 import { explainSnippet, refactorSnippet, convertSnippet } from "../api/openai"
-import { getSnippets, saveSnippets } from "../utils/storage"
 
-export function SnippetActions({ snippet }: { snippet: Snippet }) {
-  /* 
+type SnippetActionsProps = {
+  snippet: Snippet
+  onDelete: (snippet: Snippet) => void
+}
+/* 
   explainSnippet returns a promise.
   await pauses the function until the promise resolves.
-  The resolved string is passed into alert() */
-  async function handleExplain() {
-    alert(await explainSnippet(snippet.code))
+  The resolved string is passed to the output */
+export function SnippetActions({ snippet, onDelete }: SnippetActionsProps) {
+  const [output, setOutput] = useState<string>("")
+
+  const handleExplain = async () => {
+    const result = await explainSnippet(snippet.code)
+    setOutput(result)
   }
 
-  async function handleRefactor() {
-    alert(await refactorSnippet(snippet.code))
+  const handleRefactor = async () => {
+    const result = await refactorSnippet(snippet.code)
+    setOutput(result)
   }
 
-  async function handleConvert() {
-    alert(await convertSnippet(snippet.code, "Python"))
+  const handleConvert = async () => {
+    const result = await convertSnippet(snippet.code, "Python")
+    setOutput(result)
   }
 
-  function handleDelete() {
-    const snippets = getSnippets()
-    const updated = snippets.filter((s) => s.id !== snippet.id)
-    saveSnippets(updated)
-    window.location.reload() // so UI updates if no parent state
+  const handleDelete = () => {
+    const confirmed = window.confirm("Are you sure you want to delete this snippet?")
+    if (!confirmed) return
+
+    onDelete(snippet)
   }
 
   return (
@@ -32,6 +41,12 @@ export function SnippetActions({ snippet }: { snippet: Snippet }) {
       <button onClick={handleRefactor}>Refactor</button>
       <button onClick={handleConvert}>Convert to Python</button>
       <button onClick={handleDelete}>Delete snippet</button>
+
+      {output && (
+        <pre className="ai-response-container">
+          {output}
+        </pre>
+      )}
     </div>
   )
 }

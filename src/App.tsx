@@ -13,7 +13,11 @@ const App: React.FC = () => {
     setSnippets(updated)
     saveSnippets(updated)
   }
-
+  const handleRemoveSnippet = (snippet: Snippet) => {
+    const updated = snippets.filter((s) => s.id !== snippet.id)
+    setSnippets(updated)
+    saveSnippets(updated)
+  }
   return (
     <div className="app-container">
       <h1 className="title-container">SnippetAI</h1>
@@ -24,7 +28,7 @@ const App: React.FC = () => {
           <span className="snippet-data">
             {s.language} | Tags: {s.tags.join(", ")}
           </span>
-          <SnippetActions snippet={s} />
+          <SnippetActions snippet={s} onDelete={ handleRemoveSnippet }/>
         </div>
       ))}
     </div>
