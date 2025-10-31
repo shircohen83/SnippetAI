@@ -7,28 +7,42 @@ type SnippetActionsProps = {
   onDelete: (snippet: Snippet) => void
 }
 
-
 /* 
   explainSnippet returns a promise.
   await pauses the function until the promise resolves.
   The resolved string is passed to the output
- */
-export const SnippetActions: React.FC<SnippetActionsProps> = ({ snippet, onDelete }) => {
+*/
+export const SnippetActions: React.FC<SnippetActionsProps> = ({
+  snippet,
+  onDelete,
+}) => {
   const [output, setOutput] = useState<string>("")
+  const [displayOutput, setDisplayOutput] = useState(false)
+  
+  const handleAiResponseContainer=(result: string)=>{
+    if (!displayOutput) {
+      setOutput(result)
+      setDisplayOutput(true)
+    } else if (displayOutput && output !== result) {
+      setOutput(result)
+    } else {
+      setDisplayOutput(false)
+    }
 
+  }
   const handleExplain = async () => {
     const result = await explainSnippet(snippet.code)
-    setOutput(result)
+    handleAiResponseContainer(result)
   }
 
   const handleRefactor = async () => {
     const result = await refactorSnippet(snippet.code)
-    setOutput(result)
+    handleAiResponseContainer(result)
   }
 
   const handleConvert = async () => {
     const result = await convertSnippet(snippet.code, "Python")
-    setOutput(result)
+    handleAiResponseContainer(result)
   }
 
   const handleDelete = () => {
@@ -44,7 +58,7 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({ snippet, onDelet
       <button onClick={handleConvert}>Convert to Python</button>
       <button onClick={handleDelete}>Delete snippet</button>
 
-      {output && (
+      {displayOutput && (
         <>
           <style>{`
             .ai-response-container {
