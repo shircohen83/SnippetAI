@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import type { Snippet } from "../types"
 import { explainSnippet, refactorSnippet, convertSnippet } from "../api/openai"
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 type SnippetActionsProps = {
   snippet: Snippet
@@ -45,11 +47,23 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
     handleAiResponseContainer(result)
   }
 
-  const handleDelete = () => {
-    const confirmed = window.confirm("Are you sure you want to delete this snippet?")
-    if (!confirmed) return
-    onDelete(snippet)
-  }
+const handleDelete = () => {
+  confirmAlert({
+    title: 'Confirm deletion',
+    message: 'Are you sure you want to delete this snippet?',
+    buttons: [
+      {
+        label: 'Yes',
+        onClick: () => onDelete(snippet)
+      },
+      {
+        label: 'No',
+        onClick: () => {}
+      }
+    ]
+  })
+}
+
 
   return (
     <div style={{ margin: "8px 0" }}>
