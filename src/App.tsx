@@ -22,13 +22,13 @@ const App: React.FC = () => {
     <div className="app-container">
       <h1 className="title-container">SnippetAI</h1>
       <SnippetEditor onSave={handleAddSnippet} />
-      {snippets.map((s) => (
-        <div key={s.id} className="snippet-card">
-          <pre className="snippet-code">{s.code}</pre>
+      {snippets.map((snippet) => (
+        <div key={snippet.id} className="snippet-card">
+          <pre className="snippet-code">{snippet.code}</pre>
           <span className="snippet-data">
-            {s.language} | Tags: {s.tags.join(", ")}
+            {snippet.language} | Tags: {snippet.tags.join(", ")}
           </span>
-          <SnippetActions snippet={s} onDelete={ handleRemoveSnippet }/>
+          <SnippetActions snippet={snippet} onDelete={ handleRemoveSnippet }/>
         </div>
       ))}
     </div>
