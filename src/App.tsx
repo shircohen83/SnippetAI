@@ -4,22 +4,31 @@ import { SnippetActions } from "./components/snippetActions"
 import { getSnippets, saveSnippets } from "./utils/storage"
 import type { Snippet } from "./types"
 import "./App.css"
+import { ToggleButton } from "./components/ToggleButton";
 
 const App: React.FC = () => {
   const [snippets, setSnippets] = useState(getSnippets())
+  const [theme, setTheme] = useState<"light" | "dark">("light")
 
   const handleAddSnippet = (snippet: Snippet) => {
     const updated = [snippet, ...snippets]
     setSnippets(updated)
     saveSnippets(updated)
   }
+
   const handleRemoveSnippet = (snippet: Snippet) => {
     const updated = snippets.filter((s) => s.id !== snippet.id)
     setSnippets(updated)
     saveSnippets(updated)
   }
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === "light" ? "dark" : "light"))
+  }
+
   return (
-    <div className="app-container">
+    <div className={`app-container ${theme}`}>
+      <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
       <h1 className="title-container">SnippetAI</h1>
       <SnippetEditor onSave={handleAddSnippet} />
       {snippets.map((snippet) => (
@@ -28,7 +37,7 @@ const App: React.FC = () => {
           <span className="snippet-data">
             {snippet.language} | Tags: {snippet.tags.join(", ")}
           </span>
-          <SnippetActions snippet={snippet} onDelete={ handleRemoveSnippet }/>
+          <SnippetActions snippet={snippet} onDelete={handleRemoveSnippet}/>
         </div>
       ))}
     </div>
