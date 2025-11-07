@@ -1,22 +1,22 @@
 import React, { useState } from "react"
 import { SnippetEditor } from "./components/snippetEditor"
-import { SnippetActions } from "./components/snippetActions"
 import { getSnippets, saveSnippets } from "./utils/storage"
-import type { Snippet } from "./types"
+import type { DraggableSnippet } from "./types"
 import "./App.css"
 import { ToggleButton } from "./components/ToggleButton";
+import { DraggableSnippetCard } from "./components/DraggableSnippetCard"
 
 const App: React.FC = () => {
   const [snippets, setSnippets] = useState(getSnippets())
   const [theme, setTheme] = useState<"light" | "dark">("light")
 
-  const handleAddSnippet = (snippet: Snippet) => {
+  const handleAddSnippet = (snippet: DraggableSnippet) => {
     const updated = [snippet, ...snippets]
     setSnippets(updated)
     saveSnippets(updated)
   }
 
-  const handleRemoveSnippet = (snippet: Snippet) => {
+  const handleRemoveSnippet = (snippet: DraggableSnippet) => {
     const updated = snippets.filter((s) => s.id !== snippet.id)
     setSnippets(updated)
     saveSnippets(updated)
@@ -26,6 +26,11 @@ const App: React.FC = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"))
   }
 
+  const handleDrag = (id: string, dx: number, dy: number) => {
+    setSnippets(prev =>
+      prev.map(snippet => snippet.id === id ? { ...snippet, x: snippet.x + dx, y: snippet.y + dy } : snippet)
+    )
+  }
   return (
     <div className={`app-container ${theme}`}>
       <div className="title-container">
@@ -39,11 +44,12 @@ const App: React.FC = () => {
         <div className="snippets-container">    
           {snippets.map((snippet) => (
             <div key={snippet.id} className="snippet-card">
-              <pre className="snippet-code">{snippet.code}</pre>
-              <span className="snippet-data">
-                {snippet.language} | Tags: {snippet.tags.join(", ")}
-              </span>
-              <SnippetActions snippet={snippet} onDelete={handleRemoveSnippet}/>
+              <DraggableSnippetCard
+                key={snippet.id}
+                snippet={snippet}
+                onDrag={handleDrag}
+                onDelete={handleRemoveSnippet}
+              />
             </div>
           ))}
         </div>
