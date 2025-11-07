@@ -30,7 +30,8 @@ const App: React.FC = () => {
     setSnippets(prev =>
       prev.map(snippet => snippet.id === id ? { ...snippet, x: snippet.x + dx, y: snippet.y + dy } : snippet)
     )
-  }
+}
+
   return (
     <div className={`app-container ${theme}`}>
       <div className="title-container">
