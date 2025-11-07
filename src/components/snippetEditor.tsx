@@ -23,8 +23,10 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
       language,
       tags: tags.split(",").map(t => t.trim()).filter(Boolean),
       createdAt: new Date().toISOString(),
-      x: Math.floor(Math.random() * 400),
-      y: Math.floor(Math.random() * 300)
+      // x: Math.floor(Math.random() * 400),
+      // y: Math.floor(Math.random() * 300)
+      x: 20,
+      y:20
     }
 
     onSave(snippet) // notify parent
