@@ -7,7 +7,10 @@
    Light mode variables
 ---------------------------- */
 .app-container.light {
-  --bg-color: #ffffff;                 
+  --bg-color: #bc1a1a; 
+  --editor-bg-color: #fbe5ba;
+  --content-bg-color: #fdf5e2;
+  --displayer-bg-color: #DED3C4;                
   --text-color: #222222;               
   --text-color-secondary: #666666;     
   --text-color-importent: #00cec9;        
@@ -22,6 +25,9 @@
 ---------------------------- */
 .app-container.dark {
   --bg-color: #444444;
+  --editor-bg-color: #E0E0E0;
+  --content-bg-color: #B0B0B0;  
+  --displayer-bg-color: #888888;      
   --text-color: #f1f1f1;
   --text-color-secondary: #cccccc;
   --text-color-importent: #70c8c6;
@@ -33,13 +39,16 @@
 
 .app-container {
   padding: 16px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color); 
+  display: flex;
+  flex-direction: column;
 }
 
 .title-container {
   display: grid;
   grid-template-columns:  1fr 0.1fr;
+  color: var(--text-color);
+  background-color: var(--bg-color); 
 }
 
 .title-container h1 {
@@ -48,15 +57,39 @@
   color: var(--text-color-importent);
 }
 
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background-color: var(--content-bg-color);
+}
+
+.editor-container {
+  width: 100%;
+  height: 25vh;
+  overflow: auto;
+  background-color: var( --editor-bg-color);
+}
+
+.snippets-container {
+  height: 50vh;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  background-color: var( --displayer-bg-color);
+}
 
 .snippet-card {
   border: 1px solid var(--border-color);
   margin: 12px 0;
   padding: 12px;
   border-radius: 6px;
-  width: 1000px;
+  width: 500px;
+  height: 200px;
   background-color: var(--card-bg);
   color: var(--card-text);
+  overflow: auto;
 }
 
 .snippet-code {

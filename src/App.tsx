@@ -32,16 +32,22 @@ const App: React.FC = () => {
         <h1 >SnippetAI</h1>
         <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
       </div>
-      <SnippetEditor onSave={handleAddSnippet} />
-      {snippets.map((snippet) => (
-        <div key={snippet.id} className="snippet-card">
-          <pre className="snippet-code">{snippet.code}</pre>
-          <span className="snippet-data">
-            {snippet.language} | Tags: {snippet.tags.join(", ")}
-          </span>
-          <SnippetActions snippet={snippet} onDelete={handleRemoveSnippet}/>
+      <div className="content-container">
+        <div className="editor-container">
+          <SnippetEditor onSave={handleAddSnippet} />
         </div>
-      ))}
+        <div className="snippets-container">    
+          {snippets.map((snippet) => (
+            <div key={snippet.id} className="snippet-card">
+              <pre className="snippet-code">{snippet.code}</pre>
+              <span className="snippet-data">
+                {snippet.language} | Tags: {snippet.tags.join(", ")}
+              </span>
+              <SnippetActions snippet={snippet} onDelete={handleRemoveSnippet}/>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
