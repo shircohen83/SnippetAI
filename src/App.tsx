@@ -43,14 +43,12 @@ const App: React.FC = () => {
         </div>
         <div className="snippets-container">    
           {snippets.map((snippet) => (
-            <div key={snippet.id} className="snippet-card">
               <DraggableSnippetCard
                 key={snippet.id}
                 snippet={snippet}
                 onDrag={handleDrag}
                 onDelete={handleRemoveSnippet}
               />
-            </div>
           ))}
         </div>
       </div>
