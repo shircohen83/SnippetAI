@@ -28,8 +28,10 @@ const App: React.FC = () => {
 
   return (
     <div className={`app-container ${theme}`}>
-      <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
-      <h1 className="title-container">SnippetAI</h1>
+      <div className="title-container">
+        <h1 >SnippetAI</h1>
+        <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
+      </div>
       <SnippetEditor onSave={handleAddSnippet} />
       {snippets.map((snippet) => (
         <div key={snippet.id} className="snippet-card">
