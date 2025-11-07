@@ -74,10 +74,11 @@
 }
 
 .snippets-container {
-  height: 50vh;
-  overflow-y: auto;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--border-color);
-  background-color: var( --displayer-bg-color);
+  background-color: var(--displayer-bg-color);
 }
 
 .snippet-card {
