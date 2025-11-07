@@ -1,8 +1,8 @@
 import { useState } from "react"
-import type { Snippet } from "../types"
+import type { DraggableSnippet } from "../types"
 
 interface SnippetEditorProps {
-  onSave: (snippet: Snippet) => void
+  onSave: (snippet: DraggableSnippet) => void
 }
 
 /**
@@ -17,12 +17,14 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
   const handleSave = () => {
     if (!code.trim()) return
 
-    const snippet: Snippet = {
+    const snippet: DraggableSnippet = {
       id: Date.now().toString(),
       code,
       language,
       tags: tags.split(",").map(t => t.trim()).filter(Boolean),
       createdAt: new Date().toISOString(),
+      x: Math.floor(Math.random() * 400),
+      y: Math.floor(Math.random() * 300)
     }
 
     onSave(snippet) // notify parent
