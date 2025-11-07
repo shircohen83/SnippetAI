@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import type { Snippet } from "../types"
+import type { DraggableSnippet } from "../types"
 import { explainSnippet, refactorSnippet, convertSnippet } from "../api/openai"
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 type SnippetActionsProps = {
-  snippet: Snippet
-  onDelete: (snippet: Snippet) => void
+  snippet: DraggableSnippet
+  onDelete: (snippet: DraggableSnippet) => void
 }
 
 /* 
