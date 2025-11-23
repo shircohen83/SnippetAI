@@ -1,41 +1,86 @@
-import React, { useRef } from "react"
+import React, { useState, useCallback, useEffect, useRef } from "react"
 import { SnippetActions } from "./snippetActions"
 import type { DraggableSnippet } from "../types"
 
-type Props = {
+type DraggableSnippetCardProps = {
   snippet: DraggableSnippet
-  onDrag: (id: string, dx: number, dy: number) => void
   onDelete: (snippet: DraggableSnippet) => void
+  onMove: (id: string, newX: number, newY: number) => void
 }
 
-export const DraggableSnippetCard: React.FC<Props> = ({ snippet, onDrag, onDelete }) => {
-  const posRef = useRef({ x: 0, y: 0, isDragging: false })
+export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
+  snippet,
+  onDelete,
+  onMove,
+}) => {
+  
+  const [pos, setPos] = useState({ x: snippet.x, y: snippet.y })
+  const [isDragging, setIsDragging] = useState(false)
+  const [rel, setRel] = useState({ x: 0, y: 0 }) 
+  
+  // Ref to get the DOM element for position calculation
+  const cardRef = useRef<HTMLDivElement>(null)
 
-  const onMouseDown = (e: React.MouseEvent) => {
-    posRef.current = { x: e.clientX, y: e.clientY, isDragging: true }
-    document.addEventListener("mousemove", onMouseMove)
-    document.addEventListener("mouseup", onMouseUp)
-  }
+  const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button !== 0 || !cardRef.current) return
 
-  const onMouseMove = (e: MouseEvent) => {
-    if (!posRef.current.isDragging) return
-    const dx = e.clientX - posRef.current.x
-    const dy = e.clientY - posRef.current.y
-    posRef.current.x = e.clientX
-    posRef.current.y = e.clientY
-    onDrag(snippet.id, dx, dy)
-  }
+    const rect = cardRef.current.getBoundingClientRect()
 
-  const onMouseUp = () => {
-    posRef.current.isDragging = false
-    document.removeEventListener("mousemove", onMouseMove)
-    document.removeEventListener("mouseup", onMouseUp)
-  }
+    setIsDragging(true)
+    setRel({
+      x: e.pageX - rect.left,
+      y: e.pageY - rect.top,
+    })
+
+    e.stopPropagation()
+    e.preventDefault()
+  }, [])
+
+  const onMouseUp = useCallback((e: MouseEvent) => {
+    if (!isDragging) return
+    setIsDragging(false)
+    
+    onMove(snippet.id, pos.x, pos.y)
+    
+    e.stopPropagation()
+    e.preventDefault()
+  }, [isDragging, pos.x, pos.y, onMove, snippet.id])
+
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return
+    
+    setPos({
+      x: e.pageX - rel.x,
+      y: e.pageY - rel.y,
+    })
+
+    e.stopPropagation()
+    e.preventDefault()
+  }, [isDragging, rel.x, rel.y])
+
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', onMouseMove)
+      document.addEventListener('mouseup', onMouseUp)
+    } 
+    
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseup', onMouseUp)
+    }
+  }, [isDragging, onMouseMove, onMouseUp]) 
+  
 
   return (
     <div
+      ref={cardRef} 
       className="snippet-card"
-      style={{ left: snippet.x, top: snippet.y }}
+      style={{ 
+        left: `${pos.x}px`, 
+        top: `${pos.y}px`,
+        cursor: isDragging ? 'grabbing' : 'grab',
+      }}
       onMouseDown={onMouseDown}
     >
       <pre className="snippet-code">{snippet.code}</pre>
