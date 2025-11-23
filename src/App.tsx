@@ -11,10 +11,14 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light")
 
   const handleAddSnippet = (snippet: DraggableSnippet) => {
-    const updated = [snippet, ...snippets]
-    setSnippets(updated)
-    saveSnippets(updated)
-  }
+  const updated = [
+    { ...snippet, x: snippet.x ?? 20, y: snippet.y ?? 20 },
+    ...snippets
+  ]
+  setSnippets(updated)
+  saveSnippets(updated)
+}
+
 
   const handleRemoveSnippet = (snippet: DraggableSnippet) => {
     const updated = snippets.filter((s) => s.id !== snippet.id)
@@ -26,30 +30,35 @@ const App: React.FC = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"))
   }
 
-  const handleDrag = (id: string, dx: number, dy: number) => {
-    setSnippets(prev =>
-      prev.map(snippet => snippet.id === id ? { ...snippet, x: snippet.x + dx, y: snippet.y + dy } : snippet)
-    )
-}
+  const handleDragMove = (id: string, newX: number, newY: number) => {
+    setSnippets(prev => {
+      const updated = prev.map(snippet => 
+        snippet.id === id ? { ...snippet, x: newX, y: newY } : snippet
+      )
+      
+      saveSnippets(updated) 
+      return updated
+    })
+  }
 
   return (
     <div className={`app-container ${theme}`}>
       <div className="title-container">
-        <h1 >SnippetAI</h1>
+        <h1>SnippetAI</h1>
         <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
       </div>
       <div className="content-container">
         <div className="editor-container">
           <SnippetEditor onSave={handleAddSnippet} />
         </div>
-        <div className="snippets-container">    
+        <div className="snippets-container"> 
           {snippets.map((snippet) => (
-              <DraggableSnippetCard
-                key={snippet.id}
-                snippet={snippet}
-                onDrag={handleDrag}
-                onDelete={handleRemoveSnippet}
-              />
+            <DraggableSnippetCard
+              key={snippet.id}
+              snippet={snippet}
+              onDelete={handleRemoveSnippet}
+              onMove={handleDragMove} 
+            />
           ))}
         </div>
       </div>
