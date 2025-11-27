@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { DraggableSnippet } from "../types";
 import './SnippetEditor.css';
 
@@ -13,6 +13,8 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSave = () => {
     if (!code.trim()) return;
@@ -39,6 +41,20 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
     setMenuOpen(false);
   };
 
+  // Close menu if clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="snippet-editor-container">
       <textarea
@@ -50,7 +66,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
       />
 
       <div className="snippet-editor-row">
-        <div className="snippet-editor-dropdown">
+        <div className="snippet-editor-dropdown" ref={dropdownRef}>
           <button
             className="snippet-editor-button"
             onClick={() => setMenuOpen(!menuOpen)}
