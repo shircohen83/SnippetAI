@@ -1,0 +1,65 @@
+/* theme.css */
+
+/* --------------------------------
+      LIGHT MODE  (default)
+-------------------------------- */
+:root {
+  --bg-color: #bc1a1a;
+  --editor-bg-color: #fbe5ba;
+  --content-bg-color: #fdf5e2;
+  --displayer-bg-color: #DED3C4;
+
+  --text-color: #222222;
+  --text-color-secondary: #666666;
+  --text-color-important: #00cec9;
+
+  --card-bg: #f5f5f5;
+  --card-text: #222222;
+
+  --code-bg: #f7f7f7;
+  --border-color: #ccc;
+
+  /* Snippet-specific */
+  --snippet-card-bg: #f5f5f5;
+  --snippet-card-text: #222222;
+  --snippet-code-bg: #f7f7f7;
+  --snippet-border-color: #ccc;
+  --snippet-data-color: #666666;
+
+  /* Buttons */
+  --button-bg: #f0f0f0;
+  --button-hover-bg: #e0e0e0;
+  --delete-x-color: #900;
+}
+
+/* --------------------------------
+      DARK MODE (overrides)
+-------------------------------- */
+.app-container.dark {
+  --bg-color: #444444;
+  --editor-bg-color: #E0E0E0;
+  --content-bg-color: #B0B0B0;
+  --displayer-bg-color: #888888;
+
+  --text-color: #f1f1f1;
+  --text-color-secondary: #cccccc;
+  --text-color-important: #70c8c6;
+
+  --card-bg: #2a2a2a;
+  --card-text: #f1f1f1;
+
+  --code-bg: #333333;
+  --border-color: #555;
+
+  /* Snippet-specific */
+  --snippet-card-bg: #2a2a2a;
+  --snippet-card-text: #f1f1f1;
+  --snippet-code-bg: #333333;
+  --snippet-border-color: #555;
+  --snippet-data-color: #cccccc;
+
+  /* Buttons */
+  --button-bg: #444444;
+  --button-hover-bg: #555555;
+  --delete-x-color: #ff5555;
+}

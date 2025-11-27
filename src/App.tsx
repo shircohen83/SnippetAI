@@ -1,10 +1,11 @@
 import React, { useState } from "react"
-import { SnippetEditor } from "./components/snippetEditor"
+import { SnippetEditor } from "./components/SnippetEditor"
 import { getSnippets, saveSnippets } from "./utils/storage"
 import type { DraggableSnippet } from "./types"
-import "./App.css"
 import { ToggleButton } from "./components/ToggleButton";
 import { DraggableSnippetCard } from "./components/DraggableSnippetCard"
+import "./App.css"
+import './utils/Theme.css';
 
 const App: React.FC = () => {
   const [snippets, setSnippets] = useState(getSnippets())
