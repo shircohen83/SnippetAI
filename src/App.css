@@ -35,9 +35,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid var(--border-color);
-  background-color: var(--content-bg-color);
-   
   justify-content: center; /* vertical alignment in column flex */
   align-items: center;     /* horizontal alignment */
 }
@@ -67,10 +64,8 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .snippets-container {
-  height: 500px; 
+  height: 650px; 
   width: 1800px;
   position: relative;
   overflow: hidden;
