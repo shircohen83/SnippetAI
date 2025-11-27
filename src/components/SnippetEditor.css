@@ -1,0 +1,97 @@
+.snippet-editor-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.snippet-editor-textarea {
+  resize: vertical;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.snippet-editor-textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+}
+
+.snippet-editor-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.snippet-editor-input:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 0 2px rgba(40,167,69,0.2);
+}
+
+.snippet-editor-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.snippet-editor-button:hover {
+  background: linear-gradient(90deg, #0056b3, #003f7f);
+  transform: translateY(-1px);
+}
+
+.snippet-editor-button:active {
+  transform: translateY(0);
+}
+
+/* Dropdown menu styles */
+.snippet-editor-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.snippet-editor-menu {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  z-index: 10;
+  padding: 0;
+  margin: 4px 0 0 0;
+  list-style: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.snippet-editor-menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.snippet-editor-menu-item:hover {
+  background-color: #f0f0f0;
+}
