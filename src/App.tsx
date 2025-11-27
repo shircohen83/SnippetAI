@@ -49,9 +49,9 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="content-container">
-        <div className="editor-container">
-          <SnippetEditor onSave={handleAddSnippet} />
-        </div>
+
+        <SnippetEditor onSave={handleAddSnippet} />
+       
         <div className="snippets-container"> 
           {snippets.map((snippet) => (
             <DraggableSnippetCard

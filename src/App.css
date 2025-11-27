@@ -71,22 +71,20 @@
   width: 100%;
   border: 1px solid var(--border-color);
   background-color: var(--content-bg-color);
-}
-
-.editor-container {
-  width: 100%;
-  height: 25vh;
-  overflow: auto;
-  background-color: var( --editor-bg-color);
+   
+  justify-content: center; /* vertical alignment in column flex */
+  align-items: center;     /* horizontal alignment */
 }
 
 .snippets-container {
-  flex: 1;
+  height: 500px; 
+  width: 1800px;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--border-color);
   background-color: var(--displayer-bg-color);
 }
+
 
 .snippet-card {
   position: absolute;
