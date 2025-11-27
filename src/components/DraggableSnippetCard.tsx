@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { SnippetActions } from "./snippetActions";
+import { SnippetActions } from "./SnippetActions";
 import type { DraggableSnippet } from "../types";
 
 type DraggableSnippetCardProps = {

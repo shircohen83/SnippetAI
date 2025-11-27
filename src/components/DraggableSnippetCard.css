@@ -1,0 +1,88 @@
+/* DraggableSnippetCard.css */
+
+.snippet-card {
+  position: absolute;
+  border: 1px solid var(--snippet-border-color);
+  padding: 12px;
+  border-radius: 8px;
+  width: 500px;
+  height: auto; /* auto to adjust with content */
+  background-color: var(--snippet-card-bg);
+  color: var(--snippet-card-text);
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+/* Slight elevation when dragging */
+.snippet-card:active {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+/* Snippet code block */
+.snippet-code {
+  font-family: monospace;
+  font-size: 16px;
+  background-color: var(--snippet-code-bg);
+  border-radius: 4px;
+  overflow-x: auto;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+/* Snippet metadata */
+.snippet-data {
+  display: block;
+  font-size: 0.85em;
+  color: var(--snippet-data-color);
+  margin-bottom: 8px;
+}
+
+/* Buttons container */
+.buttons-line {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+/* Buttons styling */
+.buttons-line button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--snippet-border-color);
+  background-color: var(--button-bg);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.buttons-line button:hover {
+  background-color: var(--button-hover-bg);
+  transform: translateY(-1px);
+}
+
+/* Delete X button */
+.delete-x {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--delete-x-color);
+  line-height: 1;
+  padding: 0;
+}
+
+/* AI response container */
+.ai-response-container {
+  background-color: rgba(144, 238, 144, 0.25);
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 8px;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
