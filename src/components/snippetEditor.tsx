@@ -37,7 +37,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
   }
 
   return (
-    <div style={{ marginBottom: 20 }}>
+    <>
       <textarea
         rows={6}
         value={code}
@@ -55,7 +55,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
         placeholder="Tags (comma separated)"
       />
       <button onClick={handleSave}>Save Snippet</button>
-    </div>
+    </>
   )
 }
 export { SnippetEditor }
