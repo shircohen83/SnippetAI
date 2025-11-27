@@ -66,25 +66,26 @@ const handleDelete = () => {
 
 
   return (
-    <div style={{ margin: "8px 0" }}>
-      <button onClick={handleExplain}>Explain</button>
-      <button onClick={handleRefactor}>Refactor</button>
-      <button onClick={handleConvert}>Convert to Python</button>
-      <button onClick={handleDelete}>Delete snippet</button>
+    <>
+      <style>{`
+        .ai-response-container {
+          background-color: rgba(144, 238, 144, 0.25);
+          padding: 18px;
+          border-radius: 4px;
+          width: 800px;
+        }
+        .buttons-line{
+          margin: 8px 0;
+        }
+    `}</style>
+      <div className="buttons-line">
+        <button onClick={handleExplain}>Explain</button>
+        <button onClick={handleRefactor}>Refactor</button>
+        <button onClick={handleConvert}>Convert to Python</button>
+        <button onClick={handleDelete}>Delete</button>
 
-      {displayOutput && (
-        <>
-          <style>{`
-            .ai-response-container {
-              background-color: rgba(144, 238, 144, 0.25);
-              padding: 18px;
-              border-radius: 4px;
-              width: 800px;
-            }
-          `}</style>
-          <pre className="ai-response-container">{output}</pre>
-        </>
-      )}
-    </div>
+        {displayOutput && ( <pre className="ai-response-container">{output}</pre> )}
+      </div>
+    </>
   )
 }
