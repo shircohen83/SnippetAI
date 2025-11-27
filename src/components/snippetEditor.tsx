@@ -11,7 +11,7 @@ const languages = ["C", "C++", "Python", "Java", "JS", "JSX", "HTML", "CSS", "Ty
 const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
   const [code, setCode] = useState("");
   const [language, setLanguage] = useState("");
-  const [tags, setTags] = useState("");
+  const [description, setDescription] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSave = () => {
@@ -21,7 +21,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
       id: Date.now().toString(),
       code,
       language,
-      tags: tags.split(",").map(t => t.trim()).filter(Boolean),
+      description,
       createdAt: new Date().toISOString(),
       x: 20,
       y: 20,
@@ -31,7 +31,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
 
     setCode("");
     setLanguage("");
-    setTags("");
+    setDescription("");
   };
 
   const handleLanguageSelect = (lang: string) => {
@@ -49,35 +49,37 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
         placeholder="Write your code snippet..."
       />
 
-      <div className="snippet-editor-dropdown">
-        <button
-          className="snippet-editor-button"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {language || "Select Language"}
-        </button>
+      <div className="snippet-editor-row">
+        <div className="snippet-editor-dropdown">
+          <button
+            className="snippet-editor-button"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {language || "Select Language"}
+          </button>
 
-        {menuOpen && (
-          <ul className="snippet-editor-menu">
-            {languages.map((lang) => (
-              <li
-                key={lang}
-                className="snippet-editor-menu-item"
-                onClick={() => handleLanguageSelect(lang)}
-              >
-                {lang}
-              </li>
-            ))}
-          </ul>
-        )}
+          {menuOpen && (
+            <ul className="snippet-editor-menu">
+              {languages.map((lang) => (
+                <li
+                  key={lang}
+                  className="snippet-editor-menu-item"
+                  onClick={() => handleLanguageSelect(lang)}
+                >
+                  {lang}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <input
+          className="snippet-editor-input description-input"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+        />
       </div>
-
-      <input
-        className="snippet-editor-input"
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-        placeholder="Tags (comma separated)"
-      />
 
       <button className="snippet-editor-button" onClick={handleSave}>
         Save Snippet

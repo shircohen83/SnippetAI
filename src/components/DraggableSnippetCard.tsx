@@ -93,7 +93,7 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
     >
       <pre className="snippet-code">{snippet.code}</pre>
       <span className="snippet-data">
-        {snippet.language} | Tags: {snippet.tags.join(", ")}
+        {snippet.language} | description: {snippet.description}
       </span>
       <SnippetActions snippet={snippet} onDelete={() => onDelete(snippet)} />
     </div>
