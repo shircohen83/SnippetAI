@@ -4,6 +4,7 @@ import './SnippetEditor.css';
 
 interface SnippetEditorProps {
   onSave: (snippet: DraggableSnippet) => void;
+  onClose: ()=>void;
 }
 
 const languages = ["C", "C++", "Python", "Java", "JS", "JSX", "HTML", "CSS", "TypeScript", "Ruby"];
@@ -11,7 +12,7 @@ const languages = ["C", "C++", "Python", "Java", "JS", "JSX", "HTML", "CSS", "Ty
  * SnippetEditor Component
  * Allows the user to write a code snippet, select its language, and add tags — then save it.
  */
-const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
+const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
   const [code, setCode] = useState("");
   const [language, setLanguage] = useState("");
   const [description, setDescription] = useState("");
@@ -60,6 +61,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave }) => {
 
   return (
     <div className="snippet-editor-container">
+      <button className="close-editor-button" onClick={onClose}>X </button>
       <textarea
         className="snippet-editor-textarea"
         rows={6}

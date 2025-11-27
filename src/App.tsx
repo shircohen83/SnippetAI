@@ -10,6 +10,7 @@ import './utils/Theme.css';
 const App: React.FC = () => {
   const [snippets, setSnippets] = useState(getSnippets())
   const [theme, setTheme] = useState<"light" | "dark">("light")
+  const [editOpen, setEditOpen]= useState(false);
 
   const handleAddSnippet = (snippet: DraggableSnippet) => {
     const updated = [
@@ -18,8 +19,9 @@ const App: React.FC = () => {
     ]
     setSnippets(updated)
     saveSnippets(updated)
+    setEditOpen(false);
   }
-
+  
   const handleRemoveSnippet = (snippet: DraggableSnippet) => {
     const updated = snippets.filter((s) => s.id !== snippet.id)
     setSnippets(updated)
@@ -50,9 +52,8 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="content-container">
-
-        <SnippetEditor onSave={handleAddSnippet} />
-       
+       {!editOpen && <button className="editoe-button" onClick={() => setEditOpen(prev => !prev)}> Want to add a snippet?</button>}
+        {editOpen && <SnippetEditor onSave={handleAddSnippet} onClose={()=>setEditOpen(false)}/>}
         <div className="snippets-container"> 
           {snippets.map((snippet) => (
             <DraggableSnippetCard
