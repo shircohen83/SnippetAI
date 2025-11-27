@@ -65,14 +65,15 @@
   transform: translateY(-1px);
 }
 
-/* Delete X button */
 .delete-x {
   position: absolute;
+  bottom: 100px;
+  left: 360px;
   cursor: pointer;
   background: transparent;
   border: none;
   font-size: 24px;
-  color: var(--delete-x-color);
+  color: var(--delete-snippet);
 }
 
 /* AI response container */

@@ -23,7 +23,7 @@
   background: transparent;
   border: none;
   font-size: 24px;
-  color: var(--delete-x-color);
+  color: var(--close-editor);
   right: 20px;
 }
 .snippet-editor-textarea {
