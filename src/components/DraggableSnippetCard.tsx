@@ -1,87 +1,95 @@
-import React, { useState, useCallback, useEffect, useRef } from "react"
-import { SnippetActions } from "./snippetActions"
-import type { DraggableSnippet } from "../types"
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { SnippetActions } from "./snippetActions";
+import type { DraggableSnippet } from "../types";
 
 type DraggableSnippetCardProps = {
-  snippet: DraggableSnippet
-  onDelete: (snippet: DraggableSnippet) => void
-  onMove: (id: string, newX: number, newY: number) => void
-}
+  snippet: DraggableSnippet;
+  onDelete: (snippet: DraggableSnippet) => void;
+  onMove: (id: string, newX: number, newY: number) => void;
+};
 
 export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
   snippet,
   onDelete,
   onMove,
 }) => {
-  
-  const [pos, setPos] = useState({ x: snippet.x, y: snippet.y })
-  const [isDragging, setIsDragging] = useState(false)
-  const [rel, setRel] = useState({ x: 0, y: 0 }) 
-  
-  // Ref to get the DOM element for position calculation
-  const cardRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const [pos, setPos] = useState({ x: snippet.x ?? 20, y: snippet.y ?? 20 });
+  const posRef = useRef(pos);
+  posRef.current = pos;
 
-  const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.button !== 0 || !cardRef.current) return
+  const draggingRef = useRef(false);
+  const offsetRef = useRef({ x: 0, y: 0 });
 
-    const rect = cardRef.current.getBoundingClientRect()
+  const getContainerEl = () => {
+    return cardRef.current?.parentElement as HTMLDivElement | undefined;
+  };
 
-    setIsDragging(true)
-    setRel({
-      x: e.pageX - rect.left,
-      y: e.pageY - rect.top,
-    })
-
-    e.stopPropagation()
-    e.preventDefault()
-  }, [])
-
-  const onMouseUp = useCallback((e: MouseEvent) => {
-    if (!isDragging) return
-    setIsDragging(false)
-    
-    onMove(snippet.id, pos.x, pos.y)
-    
-    e.stopPropagation()
-    e.preventDefault()
-  }, [isDragging, pos.x, pos.y, onMove, snippet.id])
-
-  const onMouseMove = useCallback((e: MouseEvent) => {
-    if (!isDragging) return
-    
-    setPos({
-      x: e.pageX - rel.x,
-      y: e.pageY - rel.y,
-    })
-
-    e.stopPropagation()
-    e.preventDefault()
-  }, [isDragging, rel.x, rel.y])
-
+  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button !== 0 || !cardRef.current) return;
+    const cardRect = cardRef.current.getBoundingClientRect();
+    offsetRef.current = {
+      x: e.clientX - cardRect.left,
+      y: e.clientY - cardRect.top,
+    };
+    draggingRef.current = true;
+    e.stopPropagation();
+    e.preventDefault();
+  }, []);
 
   useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', onMouseMove)
-      document.addEventListener('mouseup', onMouseUp)
-    } 
-    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!draggingRef.current) return;
+      const container = getContainerEl();
+      if (!container || !cardRef.current) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const cardRect = cardRef.current.getBoundingClientRect();
+
+      let newX = e.clientX - containerRect.left - offsetRef.current.x;
+      let newY = e.clientY - containerRect.top - offsetRef.current.y;
+
+      newX = Math.max(0, Math.min(newX, containerRect.width - cardRect.width));
+      newY = Math.max(0, Math.min(newY, containerRect.height - cardRect.height));
+
+      setPos({ x: newX, y: newY });
+    };
+
+    const handleMouseUp = (e: MouseEvent) => {
+      if (!draggingRef.current) return;
+      draggingRef.current = false;
+
+      const { x, y } = posRef.current;
+      onMove(snippet.id, x, y);
+
+      e.stopPropagation();
+      e.preventDefault();
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
     return () => {
-      document.removeEventListener('mousemove', onMouseMove)
-      document.removeEventListener('mouseup', onMouseUp)
-    }
-  }, [isDragging, onMouseMove, onMouseUp]) 
-  
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [onMove, snippet.id]);
+
+  useEffect(() => {
+    setPos({ x: snippet.x ?? 20, y: snippet.y ?? 20 });
+  }, [snippet.x, snippet.y]);
 
   return (
     <div
-      ref={cardRef} 
+      ref={cardRef}
       className="snippet-card"
-      style={{ 
-        left: `${pos.x}px`, 
+      onMouseDown={handleMouseDown}
+      style={{
+        left: `${pos.x}px`,
         top: `${pos.y}px`,
-        cursor: isDragging ? 'grabbing' : 'grab',
+        cursor: draggingRef.current ? "grabbing" : "grab",
+        position: "absolute",
       }}
-      onMouseDown={onMouseDown}
     >
       <pre className="snippet-code">{snippet.code}</pre>
       <span className="snippet-data">
@@ -89,5 +97,5 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
       </span>
       <SnippetActions snippet={snippet} onDelete={() => onDelete(snippet)} />
     </div>
-  )
-}
+  );
+};
