@@ -45,7 +45,7 @@ const App: React.FC = () => {
   return (
     <div className={`app-container ${theme}`}>
       <div className="title-container">
-        <h1>SnippetAI</h1>
+        <h1 className="header-title">SnippetAI</h1>
         <div className="mode-label">
           <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
           <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
