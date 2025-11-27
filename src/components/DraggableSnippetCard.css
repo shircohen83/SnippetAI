@@ -5,13 +5,12 @@
   border: 1px solid var(--snippet-border-color);
   padding: 12px;
   border-radius: 8px;
-  width: 500px;
+  width: 400px;
   height: auto; /* auto to adjust with content */
+  max-height: 400px;
   background-color: var(--snippet-card-bg);
   color: var(--snippet-card-text);
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.1s, box-shadow 0.2s;
 }
 
 /* Slight elevation when dragging */
@@ -26,9 +25,13 @@
   font-size: 16px;
   background-color: var(--snippet-code-bg);
   border-radius: 4px;
-  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 150px;
+  max-width: 350px;
   padding: 8px;
   margin-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
 }
 
 /* Snippet metadata */
@@ -65,16 +68,11 @@
 /* Delete X button */
 .delete-x {
   position: absolute;
-  top: 8px;
-  right: 8px;
   cursor: pointer;
-  font-weight: bold;
   background: transparent;
   border: none;
   font-size: 24px;
   color: var(--delete-x-color);
-  line-height: 1;
-  padding: 0;
 }
 
 /* AI response container */

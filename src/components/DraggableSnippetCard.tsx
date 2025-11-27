@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { SnippetActions } from "./SnippetActions";
 import type { DraggableSnippet } from "../types";
+import "./DraggableSnippetCard.css";
 
 type DraggableSnippetCardProps = {
   snippet: DraggableSnippet;
@@ -101,7 +102,6 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
         left: `${pos.x}px`,
         top: `${pos.y}px`,
         cursor: draggingRef.current ? "grabbing" : "grab",
-        position: "absolute",
       }}
     >
       <pre className="snippet-code">{snippet.code}</pre>
