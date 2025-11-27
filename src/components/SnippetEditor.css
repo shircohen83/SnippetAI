@@ -62,7 +62,11 @@
   transform: translateY(0);
 }
 
-/* Dropdown menu styles */
+.snippet-editor-row {
+  display: flex;
+  gap: 8px;
+}
+
 .snippet-editor-dropdown {
   position: relative;
   display: inline-block;
@@ -94,4 +98,9 @@
 
 .snippet-editor-menu-item:hover {
   background-color: #f0f0f0;
+}
+
+/* Description input grows to fill remaining space */
+.description-input {
+  flex: 2;
 }
