@@ -11,6 +11,6 @@ export async function refactorSnippet(code: string) {
   return `Refactored version of:\n${code}`
 }
 
-export async function convertSnippet(code: string, targetLang: string) {
-  return `Converted to ${targetLang}:\n${code}`
+export async function bugsSnippet(code: string, targetLang: string) {
+  return `found bugs ${targetLang}:\n${code}`
 }

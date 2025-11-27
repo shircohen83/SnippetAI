@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import type { DraggableSnippet } from "../types"
-import { explainSnippet, refactorSnippet, convertSnippet } from "../api/openai"
+import { explainSnippet, refactorSnippet, bugsSnippet } from "../api/openai"
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -42,8 +42,8 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
     handleAiResponseContainer(result)
   }
 
-  const handleConvert = async () => {
-    const result = await convertSnippet(snippet.code, "Python")
+  const handleFindingBugs = async () => {
+    const result = await bugsSnippet(snippet.code, "the bugs")
     handleAiResponseContainer(result)
   }
 
@@ -115,7 +115,7 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
       <div className="buttons-line">
         <button onClick={handleExplain}>Explain</button>
         <button onClick={handleRefactor}>Refactor</button>
-        <button onClick={handleConvert}>Convert to Python</button>
+        <button onClick={handleFindingBugs}>Find bugs</button>
       </div>
 
       {displayOutput && ( <pre className="ai-response-container">{output}</pre> )}
