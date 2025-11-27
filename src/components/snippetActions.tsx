@@ -66,50 +66,6 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
 
   return (
     <>
-    <style>{`
-      .ai-response-container {
-        background-color: rgba(144, 238, 144, 0.25);
-        padding: 18px;
-        border-radius: 4px;
-        width: 800px;
-        margin-top: 8px;
-      }
-
-      .buttons-line {
-        display: flex;        /* arrange buttons in a row */
-        gap: 8px;             /* space between buttons */
-        margin: 8px 0;
-      }
-
-      .buttons-line button {
-        padding: 6px 12px;    /* nicer button size */
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        background-color: #f0f0f0;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background-color 0.2s, transform 0.1s;
-      }
-
-      .buttons-line button:hover {
-        background-color: #e0e0e0;
-        transform: translateY(-1px);
-      }
-
-      .delete-x {
-        position: absolute;
-        top: 8px;
-        right: 2px;
-        cursor: pointer;
-        font-weight: bold;
-        background: transparent;
-        border: none;
-        font-size: 24px;
-        color: #900;
-      }
-    `}</style>
-
-
       <button className="delete-x" onClick={handleDelete}>×</button>
 
       <div className="buttons-line">
