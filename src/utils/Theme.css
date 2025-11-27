@@ -1,65 +1,63 @@
-/* theme.css */
-
-/* --------------------------------
-      LIGHT MODE  (default)
--------------------------------- */
 :root {
-  --bg-color: #bc1a1a;
-  --editor-bg-color: #fbe5ba;
-  --content-bg-color: #fdf5e2;
-  --displayer-bg-color: #DED3C4;
+  --bg-color: #E3F2FD;
+  --editor-bg-color: #F0F7FF;
+  --content-bg-color: #D9EEFF;
+  --displayer-bg-color: #CCE5FF;
 
-  --text-color: #222222;
-  --text-color-secondary: #666666;
-  --text-color-important: #00cec9;
+  --text-color: #1E3A5F;
+  --text-color-secondary: #3A5A80;
+  --text-color-important: #2979FF;
+  --title-color: #0D47A1;
 
-  --card-bg: #f5f5f5;
-  --card-text: #222222;
+  --card-bg: #F0F7FF;
+  --card-text: #1E3A5F;
 
-  --code-bg: #f7f7f7;
-  --border-color: #ccc;
+  --code-bg: #E6F0FF;
+  --border-color: #B0CFFF;
 
-  /* Snippet-specific */
-  --snippet-card-bg: #f5f5f5;
-  --snippet-card-text: #222222;
-  --snippet-code-bg: #f7f7f7;
-  --snippet-border-color: #ccc;
-  --snippet-data-color: #666666;
+  --snippet-card-bg: #F0F7FF;
+  --snippet-card-text: #1E3A5F;
+  --snippet-code-bg: #E6F0FF;
+  --snippet-border-color: #B0CFFF;
+  --snippet-data-color: #3A5A80;
 
-  /* Buttons */
-  --button-bg: #f0f0f0;
-  --button-hover-bg: #e0e0e0;
-  --delete-x-color: #900;
+  --button-bg: #BBDEFB;
+  --button-hover-bg: #90CAF9;
+
+  --editor-button: #64B5F6;
+  --editor-button-hover: #42A5F5;
+  --close-editor: #42A5F5;
+  --delete-snippet: #1976D2;
 }
 
-/* --------------------------------
-      DARK MODE (overrides)
--------------------------------- */
 .app-container.dark {
-  --bg-color: #444444;
-  --editor-bg-color: #E0E0E0;
-  --content-bg-color: #B0B0B0;
-  --displayer-bg-color: #888888;
+  --bg-color: #0D1B2A;
+  --editor-bg-color: #112B45;
+  --content-bg-color: #1B3B5F;
+  --displayer-bg-color: #25486A;
 
-  --text-color: #f1f1f1;
-  --text-color-secondary: #cccccc;
-  --text-color-important: #70c8c6;
+  --text-color: #E0E8F0;
+  --text-color-secondary: #A0B1C1;
+  --text-color-important: #4FC3F7;
+  --title-color: #82B1FF;
 
-  --card-bg: #2a2a2a;
-  --card-text: #f1f1f1;
+  --card-bg: #112B45;
+  --card-text: #E0E8F0;
 
-  --code-bg: #333333;
-  --border-color: #555;
+  --code-bg: #1B3B5F;
+  --border-color: #3A5A80;
 
-  /* Snippet-specific */
-  --snippet-card-bg: #2a2a2a;
-  --snippet-card-text: #f1f1f1;
-  --snippet-code-bg: #333333;
-  --snippet-border-color: #555;
-  --snippet-data-color: #cccccc;
+  --snippet-card-bg: #112B45;
+  --snippet-card-text: #E0E8F0;
+  --snippet-code-bg: #1B3B5F;
+  --snippet-border-color: #3A5A80;
+  --snippet-data-color: #A0B1C1;
 
-  /* Buttons */
-  --button-bg: #444444;
-  --button-hover-bg: #555555;
-  --delete-x-color: #ff5555;
+  --button-bg: #1B3B5F;
+  --button-hover-bg: #25486A;
+
+  --editor-button: #4FC3F7;
+  --editor-button-hover: #29B6F6;
+  --close-editor: #29B6F6;
+  --delete-snippet: #4FC3F7;
 }
