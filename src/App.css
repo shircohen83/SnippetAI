@@ -42,6 +42,33 @@
   align-items: center;     /* horizontal alignment */
 }
 
+.editor-button {
+  position: absolute;
+  top:100px;
+  padding: 12px 24px;         
+  font-size: 16px;
+  color: var(--text-color, #222);  
+  background-color: var(--interaction-accent, #ff6f61); 
+  border: none;
+  border-radius: 12px;        
+  cursor: pointer;
+  transition: all 0.25s ease;    
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle depth */
+}
+
+.editor-button:hover {
+  background-color: var(--interaction-accent-hover, #ff856f); 
+  transform: translateY(-2px);   
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.editor-button:active {
+  transform: translateY(0);      /* button press effect */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
 .snippets-container {
   height: 500px; 
   width: 1800px;

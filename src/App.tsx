@@ -52,7 +52,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="content-container">
-       {!editOpen && <button className="editoe-button" onClick={() => setEditOpen(prev => !prev)}> Want to add a snippet?</button>}
+       {!editOpen && <button className="editor-button" onClick={() => setEditOpen(prev => !prev)}> Want to add a snippet?</button>}
         {editOpen && <SnippetEditor onSave={handleAddSnippet} onClose={()=>setEditOpen(false)}/>}
         <div className="snippets-container"> 
           {snippets.map((snippet) => (
