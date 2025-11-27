@@ -11,14 +11,13 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light")
 
   const handleAddSnippet = (snippet: DraggableSnippet) => {
-  const updated = [
-    { ...snippet, x: snippet.x ?? 20, y: snippet.y ?? 20 },
-    ...snippets
-  ]
-  setSnippets(updated)
-  saveSnippets(updated)
-}
-
+    const updated = [
+      { ...snippet, x: snippet.x ?? 20, y: snippet.y ?? 20 },
+      ...snippets
+    ]
+    setSnippets(updated)
+    saveSnippets(updated)
+  }
 
   const handleRemoveSnippet = (snippet: DraggableSnippet) => {
     const updated = snippets.filter((s) => s.id !== snippet.id)
@@ -35,8 +34,7 @@ const App: React.FC = () => {
       const updated = prev.map(snippet => 
         snippet.id === id ? { ...snippet, x: newX, y: newY } : snippet
       )
-      
-      saveSnippets(updated) 
+      saveSnippets(updated)
       return updated
     })
   }
@@ -45,7 +43,10 @@ const App: React.FC = () => {
     <div className={`app-container ${theme}`}>
       <div className="title-container">
         <h1>SnippetAI</h1>
-        <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
+        <div className="mode-label">
+          <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
+          <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
+        </div>
       </div>
       <div className="content-container">
         <div className="editor-container">
