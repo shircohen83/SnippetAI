@@ -1,6 +1,6 @@
 .snippet-editor-container {
   position: fixed;       
-  top: 33%;                    
+  top: 40%;                    
   left: 50%;                    
   transform: translate(-50%, -50%); /* offset to truly center */
   display: flex;
@@ -18,7 +18,7 @@
 }
 
 .close-editor-button{
-  position: absolute;
+  position: flex;
   cursor: pointer;
   background: transparent;
   border: none;
@@ -26,6 +26,7 @@
   color: var(--close-editor);
   right: 20px;
 }
+
 .snippet-editor-textarea {
   width:700px;
   padding: 12px;

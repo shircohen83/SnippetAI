@@ -34,16 +34,13 @@
 
 .content-container {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;  /* centers horizontally & vertically */
   width: 100%;
-  justify-content: center; /* vertical alignment in column flex */
-  align-items: center;     /* horizontal alignment */
 }
 
 .editor-button {
-  position: absolute;
-  top:100px;
+  width: 200px;
   padding: 12px 24px;         
   font-size: 16px;
   color: var(--text-color, #222);  
