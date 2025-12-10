@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { SnippetEditor } from "./components/SnippetEditor"
+import { SnippetEditor } from "./components/snippetEditor"
 import { getSnippets, saveSnippets } from "./utils/storage"
 import type { DraggableSnippet } from "./types"
 import { ToggleButton } from "./components/ToggleButton";
@@ -52,7 +52,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="content-container">
-       {!editOpen && <button className="editor-button" onClick={() => setEditOpen(prev => !prev)}> Want to add a snippet?</button>}
+      <button className="editor-button" onClick={() => setEditOpen(prev => !prev)}> Want to add a snippet?</button>
         {editOpen && <SnippetEditor onSave={handleAddSnippet} onClose={()=>setEditOpen(false)}/>}
         <div className="snippets-container"> 
           {snippets.map((snippet) => (

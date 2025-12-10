@@ -10,7 +10,7 @@ interface SnippetEditorProps {
 const languages = ["C", "C++", "Python", "Java", "JS", "JSX", "HTML", "CSS", "TypeScript", "Ruby"];
 /**
  * SnippetEditor Component
- * Allows the user to write a code snippet, select its language, and add tags — then save it.
+ * Allows the user to write a code snippet, select its language, and add description — then save it.
  */
 const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
   const [code, setCode] = useState("");
