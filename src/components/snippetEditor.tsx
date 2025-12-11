@@ -61,7 +61,8 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
 
   return (
     <div className="snippet-editor-container">
-      <div>
+      <button className="close-editor-button" onClick={onClose}>X </button>
+
         <textarea
           className="snippet-editor-textarea"
           rows={6}
@@ -69,8 +70,6 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
           onChange={(e) => setCode(e.target.value)}
           placeholder="Write your code snippet..."
         />
-        <button className="close-editor-button" onClick={onClose}>X </button>
-      </div>
 
       <div className="snippet-editor-row">
         <div className="snippet-editor-dropdown" ref={dropdownRef}>

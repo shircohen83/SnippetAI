@@ -16,14 +16,15 @@
   z-index: 9999;                 /* high z-index to appear above all */
 }
 
-.close-editor-button{
-  position: flex;
+.close-editor-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
   cursor: pointer;
   background: transparent;
   border: none;
   font-size: 24px;
   color: var(--close-editor);
-  width: 10px;
 }
 
 .snippet-editor-textarea {
