@@ -19,7 +19,7 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
 
   // State to track current position of the card
   const [pos, setPos] = useState({ x: snippet.x ?? 20, y: snippet.y ?? 20 });
-  
+
   // Ref to track if the card is currently being dragged
   const draggingRef = useRef(false);
 
@@ -31,7 +31,7 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
     return cardRef.current?.parentElement as HTMLDivElement | undefined;
   };
 
-  
+
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button !== 0 || !cardRef.current) return; // only left click
     const cardRect = cardRef.current.getBoundingClientRect();
@@ -39,7 +39,7 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
       x: e.clientX - cardRect.left,
       y: e.clientY - cardRect.top,
     };
-    draggingRef.current = true; 
+    draggingRef.current = true;
     e.stopPropagation();
     e.preventDefault();
   }, []);
@@ -106,7 +106,8 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
     >
       <pre className="snippet-code">{snippet.code}</pre>
       <span className="snippet-data">
-        {snippet.language} | description: {snippet.description}
+        {snippet.language}
+        {snippet.description && ` | description: ${snippet.description}`}
       </span>
       <SnippetActions snippet={snippet} onDelete={() => onDelete(snippet)} />
     </div>
