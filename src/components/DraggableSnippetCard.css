@@ -1,13 +1,11 @@
 /* DraggableSnippetCard.css */
 
 .snippet-card {
-  position: absolute;
+  position: absolute; /* required for dragging */
   border: 1px solid var(--snippet-border-color);
   padding: 12px;
   border-radius: 8px;
   width: 400px;
-  height: auto; /* auto to adjust with content */
-  max-height: 400px;
   background-color: var(--snippet-card-bg);
   color: var(--snippet-card-text);
   overflow: hidden;
@@ -67,12 +65,12 @@
 
 .delete-x {
   position: absolute;
-  bottom: 100px;
-  left: 360px;
+  top: 10px;
+  right: 0px;
   cursor: pointer;
-  background: transparent;
   border: none;
-  font-size: 24px;
+  background: transparent;
+  font-size: 20px;
   color: var(--delete-snippet);
 }
 

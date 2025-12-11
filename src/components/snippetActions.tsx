@@ -66,7 +66,7 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
 
   return (
     <>
-      <button className="delete-x" onClick={handleDelete}>×</button>
+      <button className="delete-x" onClick={handleDelete}>X</button>
 
       <div className="buttons-line">
         <button onClick={handleExplain}>Explain</button>
