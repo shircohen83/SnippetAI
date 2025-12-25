@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import type { DraggableSnippet } from "../types";
-import './SnippetEditor.css';
+import "./SnippetEditor.css";
 
 interface SnippetEditorProps {
   onSave: (snippet: DraggableSnippet) => void;
-  onClose: ()=>void;
+  onClose: () => void;
 }
 
-const languages = ["C", "C++", "Python", "Java", "JS", "JSX", "HTML", "CSS", "TypeScript", "Ruby"];
+const languages = ["C", "C++", "Python", "Java", "JS", "JSX", "HTML", "CSS", "TypeScript"];
 /**
  * SnippetEditor Component
  * Allows the user to write a code snippet, select its language, and add description — then save it.
@@ -20,8 +20,10 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  const isValid = Boolean(code.trim()) && Boolean(language);
+
   const handleSave = () => {
-    if (!code.trim()) return;
+    if (!isValid) return;
 
     const snippet: DraggableSnippet = {
       id: Date.now().toString(),
@@ -48,7 +50,10 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
   // Close menu if clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setMenuOpen(false);
       }
     };
@@ -61,16 +66,18 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
 
   return (
     <div className="snippet-editor-container">
-      <button className="close-editor-button" onClick={onClose}>X </button>
+      <button className="close-editor-button" onClick={onClose}>
+        X
+      </button>
 
-        <textarea
-          className="snippet-editor-textarea"
-          rows={6}
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Write your code snippet..."
-        />
-
+      <textarea
+        className={`snippet-editor-textarea ${!code.trim() ? "invalid" : ""}`}
+        rows={6}
+        value={code}
+        onChange={(e) => setCode(e.target.value)}
+        placeholder="Write your code snippet..."
+      />
+ 
       <div className="snippet-editor-row">
         <div className="snippet-editor-dropdown" ref={dropdownRef}>
           <button
@@ -79,6 +86,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
           >
             {language || "Select Language"}
           </button>
+          <span className="required">*</span>
 
           {menuOpen && (
             <ul className="snippet-editor-menu">
@@ -103,7 +111,11 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
         />
       </div>
 
-      <button className="snippet-editor-button" onClick={handleSave}>
+      <button
+        className="snippet-editor-button"
+        onClick={handleSave}
+        disabled={!isValid}
+      >
         Save Snippet
       </button>
     </div>

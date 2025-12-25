@@ -122,3 +122,19 @@
 .description-input {
   flex: 2;
 }
+
+
+.required {
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+.invalid {
+  border: 1px solid #e74c3c !important;
+}
+
+.snippet-editor-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
