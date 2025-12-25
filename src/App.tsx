@@ -4,6 +4,8 @@ import { getSnippets, saveSnippets } from "./utils/storage"
 import type { DraggableSnippet } from "./types"
 import { ToggleButton } from "./components/ToggleButton";
 import { DraggableSnippetCard } from "./components/DraggableSnippetCard"
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "./App.css"
 import './utils/Theme.css';
 
@@ -29,11 +31,25 @@ const App: React.FC = () => {
   }
 
   const handleClearAll = () => {
-    if (window.confirm("Are you sure you want to delete all snippets?")) {
-      setSnippets([])
-      saveSnippets([])
-    }
-  }
+    confirmAlert({
+      title: "Confirm deletion",
+      message: "Are you sure you want to delete ALL snippets?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            setSnippets([]);
+            saveSnippets([]);
+          }
+        },
+        {
+          label: "No",
+          onClick: () => {}
+        }
+      ]
+    });
+  };
+
 
   const toggleTheme = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"))
