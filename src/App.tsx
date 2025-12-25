@@ -28,6 +28,13 @@ const App: React.FC = () => {
     saveSnippets(updated)
   }
 
+  const handleClearAll = () => {
+    if (window.confirm("Are you sure you want to delete all snippets?")) {
+      setSnippets([])
+      saveSnippets([])
+    }
+  }
+
   const toggleTheme = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"))
   }
@@ -48,6 +55,9 @@ const App: React.FC = () => {
         <h1 className="header-title">SnippetAI</h1>
         <div className="mode-label">
           <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
+          <button className="clear-all-btn" onClick={handleClearAll}>
+            Clear All
+          </button>
           <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
         </div>
       </div>
