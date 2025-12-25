@@ -8,14 +8,14 @@
   width: 400px;
   background-color: var(--snippet-card-bg);
   color: var(--snippet-card-text);
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Slight elevation when dragging */
 .snippet-card:active {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
-}
+}/**/
 
 /* Snippet code block */
 .snippet-code {
@@ -23,13 +23,28 @@
   font-size: 16px;
   background-color: var(--snippet-code-bg);
   border-radius: 4px;
-  overflow-y: auto;
+  overflow: auto;
   max-height: 150px;
   max-width: 350px;
   padding: 8px;
   margin-bottom: 8px;
+  cursor: zoom-in;
+
+  
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+  
+  transition: transform 0.2s ease, max-height 0.2s ease;
+  transform-origin: top left;
+}
+
+.snippet-code.expanded {
+  max-height: 600px;
+  max-width: 900px;
+  transform: scale(1.2);
+  z-index: 10;
+  cursor: zoom-out;
+  overflow: auto;
 }
 
 /* Snippet metadata */

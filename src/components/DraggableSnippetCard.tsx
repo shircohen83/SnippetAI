@@ -20,6 +20,9 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
   // State to track current position of the card
   const [pos, setPos] = useState({ x: snippet.x ?? 20, y: snippet.y ?? 20 });
 
+  // State to track whether code section is expanded
+  const [expanded, setExpanded] = useState(false);
+
   // Ref to track if the card is currently being dragged
   const draggingRef = useRef(false);
 
@@ -31,14 +34,15 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
     return cardRef.current?.parentElement as HTMLDivElement | undefined;
   };
 
-
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (e.button !== 0 || !cardRef.current) return; // only left click
+
     const cardRect = cardRef.current.getBoundingClientRect();
     offsetRef.current = {
       x: e.clientX - cardRect.left,
       y: e.clientY - cardRect.top,
     };
+
     draggingRef.current = true;
     e.stopPropagation();
     e.preventDefault();
@@ -46,7 +50,6 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
 
   // Handle dragging movement and release
   useEffect(() => {
-
     const handleMouseMove = (e: MouseEvent) => {
       if (!draggingRef.current) return;
 
@@ -70,10 +73,9 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
     // Mouse up: stop dragging and notify parent of new position
     const handleMouseUp = (e: MouseEvent) => {
       if (!draggingRef.current) return;
-      draggingRef.current = false;
 
-      const { x, y } = pos;
-      onMove(snippet.id, x, y); // inform parent about updated position
+      draggingRef.current = false;
+      onMove(snippet.id, pos.x, pos.y);
 
       e.stopPropagation();
       e.preventDefault();
@@ -86,12 +88,30 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [onMove, snippet.id]);
+  }, [onMove, snippet.id, pos.x, pos.y]);
 
   // Sync position if snippet props change
   useEffect(() => {
     setPos({ x: snippet.x ?? 20, y: snippet.y ?? 20 });
   }, [snippet.x, snippet.y]);
+
+  // Collapse expanded code when clicking outside the card
+  useEffect(() => {
+    if (!expanded) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!cardRef.current) return;
+
+      if (!cardRef.current.contains(e.target as Node)) {
+        setExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [expanded]);
 
   return (
     <div
@@ -104,7 +124,14 @@ export const DraggableSnippetCard: React.FC<DraggableSnippetCardProps> = ({
         cursor: draggingRef.current ? "grabbing" : "grab",
       }}
     >
-      <pre className="snippet-code">{snippet.code}</pre>
+      <pre
+        className={`snippet-code ${expanded ? "expanded" : ""}`}
+        onMouseDown={(e) => e.stopPropagation()} // prevent the event from reaching the parent (snippet-card)
+        onClick={() => setExpanded((prev) => !prev)}
+      >
+        {snippet.code}
+      </pre>
+
       <span className="snippet-data">
         {snippet.language}
         {snippet.description && ` | description: ${snippet.description}`}
