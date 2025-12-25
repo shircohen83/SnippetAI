@@ -3,6 +3,8 @@ import type { DraggableSnippet } from "../types"
 import { explainSnippet, refactorSnippet, bugsSnippet } from "../api/openai"
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import "./SnippetActions.css";
+
 
 type SnippetActionsProps = {
   snippet: DraggableSnippet
@@ -64,14 +66,29 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
     })
   }
 
+  const handleCopy = async () => {
+  try {
+    await navigator.clipboard.writeText(snippet.code)
+    setOutput("Code copied to clipboard ✅")
+    setDisplayOutput(true)
+
+    // auto-hide message
+    setTimeout(() => setDisplayOutput(false), 1500)
+  } catch (err) {
+    setOutput("Failed to copy code ❌")
+    setDisplayOutput(true)
+  }
+}
+
   return (
     <>
-      <button className="delete-x" onClick={handleDelete}>X</button>
+      <button className="delete-snippet" onClick={handleDelete}>X</button>
 
       <div className="buttons-line">
         <button onClick={handleExplain}>Explain</button>
         <button onClick={handleRefactor}>Refactor</button>
         <button onClick={handleFindingBugs}>Find bugs</button>
+        <button onClick={handleCopy} className="copy-btn">Copy to clipboard</button>
       </div>
 
       {displayOutput && ( <pre className="ai-response-container">{output}</pre> )}

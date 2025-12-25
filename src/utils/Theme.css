@@ -23,6 +23,8 @@
 
   --button-bg: #BBDEFB;
   --button-hover-bg: #90CAF9;
+  --important-btn-bg: #2979FF;
+  --important-btn-hover-bg: #1565C0; 
 
   --editor-button: #64B5F6;
   --editor-button-hover: #42A5F5;
@@ -55,6 +57,8 @@
 
   --button-bg: #1B3B5F;
   --button-hover-bg: #25486A;
+  --important-btn-bg: #4FC3F7;
+  --important-btn-hover-bg: #29B6F6;
 
   --editor-button: #4FC3F7;
   --editor-button-hover: #29B6F6;
