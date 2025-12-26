@@ -70,10 +70,10 @@ const App: React.FC = () => {
       <div className="title-container">
         <h1 className="header-title">SnippetAI</h1>
         <div className="mode-label">
-          <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
-          <button className="clear-all-btn" onClick={handleClearAll}>
+          {snippets.length!=0 && <button className="clear-all-btn" onClick={handleClearAll}>
             Clear All
-          </button>
+          </button>}
+          <span>{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
           <ToggleButton isOn={theme === "dark"} onToggle={toggleTheme} />
         </div>
       </div>
