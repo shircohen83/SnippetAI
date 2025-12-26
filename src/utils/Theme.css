@@ -4,6 +4,7 @@
   --content-bg-color: #D9EEFF;
   --displayer-bg-color: #CCE5FF;
 
+  --text-color-white: #FFFFFF;
   --text-color: #1E3A5F;
   --text-color-secondary: #3A5A80;
   --text-color-important: #2979FF;
@@ -26,14 +27,14 @@
   --important-btn-bg: #2979FF;
   --important-btn-hover-bg: #1565C0; 
 
-  --editor-button: #64B5F6;
+  --editor-button: #11314b;
   --editor-button-hover: #42A5F5;
   --close-editor: #42A5F5;
   --delete-snippet: #1976D2;
 }
 
 .app-container.dark {
-  --bg-color: #0D1B2A;
+  --bg-color: #657c95;
   --editor-bg-color: #112B45;
   --content-bg-color: #1B3B5F;
   --displayer-bg-color: #25486A;
@@ -60,7 +61,7 @@
   --important-btn-bg: #4FC3F7;
   --important-btn-hover-bg: #29B6F6;
 
-  --editor-button: #4FC3F7;
+  --editor-button: #bac1c6;
   --editor-button-hover: #29B6F6;
   --close-editor: #29B6F6;
   --delete-snippet: #4FC3F7;
