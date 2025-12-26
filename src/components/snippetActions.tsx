@@ -67,18 +67,9 @@ export const SnippetActions: React.FC<SnippetActionsProps> = ({
   }
 
   const handleCopy = async () => {
-  try {
-    await navigator.clipboard.writeText(snippet.code)
-    setOutput("Code copied to clipboard ✅")
-    setDisplayOutput(true)
-
-    // auto-hide message
-    setTimeout(() => setDisplayOutput(false), 1500)
-  } catch (err) {
-    setOutput("Failed to copy code ❌")
-    setDisplayOutput(true)
-  }
-}
+    navigator.clipboard.writeText(snippet.code);
+    handleAiResponseContainer("Code copied to clipboard ✅");
+  } 
 
   return (
     <>
