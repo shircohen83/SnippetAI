@@ -80,6 +80,18 @@
   transform: translateY(0);
 }
 
+.language-editor-button{
+  width:150px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--text-color);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
 .snippet-editor-row {
   display: flex;
   gap: 8px;

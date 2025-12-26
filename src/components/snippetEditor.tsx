@@ -81,7 +81,7 @@ const SnippetEditor: React.FC<SnippetEditorProps> = ({ onSave, onClose }) => {
       <div className="snippet-editor-row">
         <div className="snippet-editor-dropdown" ref={dropdownRef}>
           <button
-            className="snippet-editor-button"
+            className="language-editor-button"
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {language || "Select Language"}
