@@ -27,7 +27,7 @@
 }
 
 .header-title{
-  color: var(--title-color)
+  color: var(--title-color);
 }
 
 .title-container h1 {
@@ -62,6 +62,7 @@
   cursor: pointer;
   transition: all 0.25s ease;    
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle depth */
+  margin-top: 5px;
 }
 
 .editor-button:hover {
@@ -76,7 +77,7 @@
 }
 
 .snippets-container {
-  height: 650px; 
+  height: 740px; 
   width: 1800px;
   position: relative;
   overflow: hidden;
